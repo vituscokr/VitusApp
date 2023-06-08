@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+import 'package:vitus_app/widgets/login_page.dart';
+
 
 void main() {
+  KakaoSdk.init(nativeAppKey: "a3716e96d87612fea54366b2b379dcea");
   runApp(const MyApp());
 }
 
@@ -24,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: LoginPage()
     );
   }
 }
