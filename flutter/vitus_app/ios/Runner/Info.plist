@@ -60,9 +60,53 @@
     			<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
     			<string>a3716e96d87612fea54366b2b379dcea</string>
     			<string>com.googleusercontent.apps.398891682922-bvvpaksmjdmgs30q5rb1kk5eha7oalej</string>
+    			<string>naverlogin</string>
     		</array>
     	</dict>
     </array>
     <!-- End of the Google Sign-in Section -->
+     <key>LSApplicationQueriesSchemes</key>
+        <array>
+           <string>naversearchapp</string>
+           <string>naversearchthirdlogin</string>
+        </array>
+
+        <key>naverServiceAppUrlScheme</key>
+        <string>socialloginapp</string>
+
+        <!-- naver client_id -->
+        <key>naverConsumerKey</key>
+        <string>client-id</string>
+
+        <!-- naver client_secret -->
+        <key>naverConsumerSecret</key>
+        <string>client-secret</string>
+
+        <key>naverServiceAppName</key>
+        <string>app_name</string>
+
+        <!-- http allows configurations -->
+        <key>NSAppTransportSecurity</key>
+        <dict>
+           <key>NSAllowsArbitraryLoads</key>
+           <true/>
+           <key>NSExceptionDomains</key>
+           <dict>
+              <key>naver.com</key>
+              <dict>
+                 <key>NSExceptionRequiresForwardSecrecy</key>
+                 <false/>
+                 <key>NSIncludesSubdomains</key>
+                 <true/>
+              </dict>
+              <key>naver.net</key>
+              <dict>
+                 <key>NSExceptionRequiresForwardSecrecy</key>
+                 <false/>
+                 <key>NSIncludesSubdomains</key>
+                 <true/>
+              </dict>
+            </dict>
+        </dict>
 </dict>
 </plist>

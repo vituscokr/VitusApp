@@ -3,11 +3,16 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:vitus_app/enums/LoginPlatform.dart';
+
+
+const String naverLoginClientId = "T9uDAmPdfRnpjDmJucB_";
+const String naverLoginClientScret = "e8MZR8EZyM";
 const List<String> googleScopes = <String>[
   'email',
   'https://www.googleapis.com/auth/contacts.readonly'
@@ -105,6 +110,23 @@ class _LoginPageState extends State<LoginPage> {
           const Text("You are not currently signed in"),
           InkWell(
             onTap: () async {
+              final NaverLoginResult result = await FlutterNaverLogin.logIn();
+              if(result.status == NaverLoginStatus.loggedIn) {
+                print('accessToken = ${result.accessToken}');
+                print('id = ${result.account.id}');
+                print('email = ${result.account.email}');
+                print('name = ${result.account.name}');
+
+                setState(() {
+                  _loginPlatform = LoginPlatform.naver;
+                });
+              }
+
+            },
+            child: const Text("naver login"),
+          ),
+          InkWell(
+            onTap: () async {
               try {
                 bool isInstalled = await isKakaoTalkInstalled();
                 OAuthToken token = isInstalled
@@ -162,6 +184,9 @@ class _LoginPageState extends State<LoginPage> {
         break;
       case LoginPlatform.google:
         _googleSignIn.disconnect();
+        break;
+      case LoginPlatform.naver:
+        await FlutterNaverLogin.logOut();
         break;
       case LoginPlatform.none:
         break;
