@@ -6,29 +6,9 @@
 	<string>398891682922-bvvpaksmjdmgs30q5rb1kk5eha7oalej.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.398891682922-bvvpaksmjdmgs30q5rb1kk5eha7oalej</string>
-	<key>API_KEY</key>
-	<string>AIzaSyCTI1JzCnEVDHzzQqW8O0f6GkzWJHthHcE</string>
-	<key>GCM_SENDER_ID</key>
-	<string>139741269847</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>kr.co.vitus.app</string>
-	<key>PROJECT_ID</key>
-	<string>vitus-89211</string>
-	<key>STORAGE_BUCKET</key>
-	<string>vitus-89211.appspot.com</string>
-	<key>IS_ADS_ENABLED</key>
-	<false></false>
-	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
-	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
-	<key>IS_GCM_ENABLED</key>
-	<true></true>
-	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
-	<key>GOOGLE_APP_ID</key>
-	<string>1:139741269847:ios:335b28bbf8e9cb9f963812</string>
 </dict>
 </plist>
