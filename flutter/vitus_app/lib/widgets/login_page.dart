@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
@@ -89,8 +90,8 @@ class _LoginPageState extends State<LoginPage> {
             }
 
           }),
-          _loginButton("logo_kakao", signInWithKakao)
-
+          _loginButton("logo_kakao", signInWithKakao),
+          _loginButton('logo_facebook', signInFacebook)
 
         ],
       );
@@ -128,6 +129,25 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  void signInFacebook() async {
+    final LoginResult result = await FacebookAuth.instance.login();
+
+    if (result.status == LoginStatus.success) {
+      final url = Uri.https('graph.facebook.com', '/v2.12/me',
+          {'fields': 'email, name', 'access_token': result.accessToken!.token});
+
+      final response = await http.get(url);
+
+      final profileInfo = json.decode(response.body);
+      print(profileInfo.toString());
+
+      setState(() {
+        _loginPlatform = LoginPlatform.facebook;
+
+      });
+    }
+  }
+
   void signInWithKakao() async {
     try {
       bool isInstalled = await isKakaoTalkInstalled();
@@ -161,6 +181,9 @@ class _LoginPageState extends State<LoginPage> {
     switch(_loginPlatform) {
       case LoginPlatform.kakao:
         await UserApi.instance.logout();
+        break;
+      case LoginPlatform.facebook:
+        await FacebookAuth.instance.logOut();
         break;
       case LoginPlatform.google:
         await GoogleSignIn().signOut();

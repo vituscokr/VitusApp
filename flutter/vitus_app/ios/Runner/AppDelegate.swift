@@ -2,6 +2,7 @@ import UIKit
 import Flutter
 import NaverThirdPartyLogin
 
+
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
   override func application(
@@ -20,7 +21,8 @@ import NaverThirdPartyLogin
             NaverThirdPartyLoginConnection.getSharedInstance().application(app, open: url, options: options)
            return true
         }else {
-            return true
+            return super.application(app, open: url, options: options)
         }
     }
+
 }

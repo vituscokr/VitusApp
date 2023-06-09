@@ -38,8 +38,12 @@ dependencies:
   google_sign_in: ^6.1.4
   kakao_flutter_sdk_user: ^1.4.3
   flutter_naver_login: ^1.8.0
+
   sign_in_with_apple: ^4.3.0
-  http: ^1.0.0
+  http: ^0.13.5
+  flutter_facebook_auth: ^5.0.11
+  #flutter_login_facebook: ^1.8.0
+  firebase_auth: ^4.6.2
 
 dev_dependencies:
   flutter_test:

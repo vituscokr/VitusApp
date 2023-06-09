@@ -27,8 +27,8 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fbUrlSchemes</string>
-				<string>com.googleusercontent.apps.398891682922-bvvpaksmjdmgs30q5rb1kk5eha7oalej</string>
+				<string>fb1762992077491237</string>
+				<string>com.googleusercontent.apps.139741269847-q2k2s0rrbmbv0saoqa46u076t7ekgngb</string>
 				<string>kakaoa3716e96d87612fea54366b2b379dcea</string>
 				<string>naverlogin</string>
 			</array>
@@ -61,8 +61,8 @@
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>naversearchapp</string>
-		<string>naversearchthirdlogin</string>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
 	</array>
 	<key>naverServiceAppUrlScheme</key>
 	<string>naverlogin</string>
@@ -94,5 +94,11 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>FacebookAppID</key>
+	<string>1762992077491237</string>
+	<key>FacebookClientToken</key>
+	<string>197c3b0b35abe33c4daa048ed5af73cf</string>
+	<key>FacebookDisplayName</key>
+	<string>vitus</string>
 </dict>
 </plist>
