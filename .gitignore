@@ -1,3 +1,5 @@
 flutter/vitus_app/.gitignore
 php/www/data/*
 php/www/include/config.php
+php/www/.vscode/sftp.json
+php/www/.idea/*
