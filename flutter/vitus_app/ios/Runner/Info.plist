@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -20,9 +22,23 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1762992077491237</string>
+				<string>com.googleusercontent.apps.139741269847-q2k2s0rrbmbv0saoqa46u076t7ekgngb</string>
+				<string>kakaoa3716e96d87612fea54366b2b379dcea</string>
+				<string>naverlogin</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -43,70 +59,46 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
-	<!-- Put me in the [my_project]/ios/Runner/Info.plist file -->
-    <!-- Google Sign-in Section -->
-    <key>CFBundleURLTypes</key>
-    <array>
-    	<dict>
-    		<key>CFBundleTypeRole</key>
-    		<string>Editor</string>
-    		<key>CFBundleURLSchemes</key>
-    		<array>
-    			<!-- TODO Replace this value: -->
-    			<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
-    			<string>a3716e96d87612fea54366b2b379dcea</string>
-    			<string>com.googleusercontent.apps.398891682922-bvvpaksmjdmgs30q5rb1kk5eha7oalej</string>
-    			<string>naverlogin</string>
-    		</array>
-    	</dict>
-    </array>
-    <!-- End of the Google Sign-in Section -->
-     <key>LSApplicationQueriesSchemes</key>
-        <array>
-           <string>naversearchapp</string>
-           <string>naversearchthirdlogin</string>
-        </array>
-
-        <key>naverServiceAppUrlScheme</key>
-        <string>socialloginapp</string>
-
-        <!-- naver client_id -->
-        <key>naverConsumerKey</key>
-        <string>client-id</string>
-
-        <!-- naver client_secret -->
-        <key>naverConsumerSecret</key>
-        <string>client-secret</string>
-
-        <key>naverServiceAppName</key>
-        <string>app_name</string>
-
-        <!-- http allows configurations -->
-        <key>NSAppTransportSecurity</key>
-        <dict>
-           <key>NSAllowsArbitraryLoads</key>
-           <true/>
-           <key>NSExceptionDomains</key>
-           <dict>
-              <key>naver.com</key>
-              <dict>
-                 <key>NSExceptionRequiresForwardSecrecy</key>
-                 <false/>
-                 <key>NSIncludesSubdomains</key>
-                 <true/>
-              </dict>
-              <key>naver.net</key>
-              <dict>
-                 <key>NSExceptionRequiresForwardSecrecy</key>
-                 <false/>
-                 <key>NSIncludesSubdomains</key>
-                 <true/>
-              </dict>
-            </dict>
-        </dict>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+	</array>
+	<key>naverServiceAppUrlScheme</key>
+	<string>naverlogin</string>
+	<key>naverConsumerKey</key>
+	<string>8XQoanVeya2pYa_YbCrz</string>
+	<key>naverConsumerSecret</key>
+	<string>OAwl6QhIoz</string>
+	<key>naverServiceAppName</key>
+	<string>Vitus</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>naver.com</key>
+			<dict>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+			<key>naver.net</key>
+			<dict>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
+	<key>FacebookAppID</key>
+	<string>1762992077491237</string>
+	<key>FacebookClientToken</key>
+	<string>197c3b0b35abe33c4daa048ed5af73cf</string>
+	<key>FacebookDisplayName</key>
+	<string>vitus</string>
 </dict>
 </plist>

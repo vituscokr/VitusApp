@@ -1,25 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
-import 'dart:async';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:vitus_app/enums/login_platform.dart';
 import 'package:http/http.dart' as http;
-import 'package:vitus_app/enums/LoginPlatform.dart';
-
-
-const String naverLoginClientId = "T9uDAmPdfRnpjDmJucB_";
-const String naverLoginClientScret = "e8MZR8EZyM";
-const List<String> googleScopes = <String>[
-  'email',
-  'https://www.googleapis.com/auth/contacts.readonly'
-];
-GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: googleScopes,
-);
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -31,162 +20,179 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   LoginPlatform _loginPlatform = LoginPlatform.none;
 
-  GoogleSignInAccount? _currentUser;
-  bool _isAuthorized = false;
-  String _contactText = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _googleSignIn.onCurrentUserChanged
-    .listen((GoogleSignInAccount? account) async {
-      print("onCurrentUserChanged");
-      bool isAuthorized = account != null;
-      if(kIsWeb && account != null) {
-        isAuthorized = await _googleSignIn.canAccessScopes(googleScopes);
-      }
-      print(account);
-
-      setState(() {
-        _currentUser = account;
-        _isAuthorized = isAuthorized;
-      });
-      if(isAuthorized) {
-        unawaited(_handleGetContact(account!));
-      }
-
-    });
-    _googleSignIn.signInSilently();
-  }
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ConstrainedBox(
-        constraints: const BoxConstraints.expand(),
-        child: _buildBody(),
+      body: SafeArea(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints.expand(),
+          child: _buildBody(),
+        ),
       )
     );
   }
-
   Widget _buildBody() {
-    final GoogleSignInAccount? user = _currentUser;
 
-    if(user != null) {
+    if(_loginPlatform == LoginPlatform.none) {
       return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          ListTile(
-            leading: GoogleUserCircleAvatar(
-              identity: user,
-            ),
-            title: Text(user.displayName ?? ''),
-            subtitle: Text(user.email),
-          ),
-          const Text('Signed in successfully.'),
-          if(_isAuthorized) ...<Widget>[
-            Text(_contactText),
-            ElevatedButton(
-                onPressed: () => _handleGetContact(user),
-                child: const Text('REFRESH')
-            ),
-          ],
-          if(!_isAuthorized) ...<Widget>[
-            const Text('Additional permissions needed to read your contacts.'),
-            ElevatedButton(
-              onPressed: _handleAuthorizeScopes,
-              child: const Text('REQUEST PERMISSIONS'),
-            ),
-          ]
+
+          _loginButton("logo_google", () async {
+            final GoogleSignInAccount? googleUser = await GoogleSignIn()
+                .signIn();
+            if (googleUser != null) {
+              print('name = ${googleUser.displayName}');
+              print('email = ${googleUser.email}');
+              print('id = ${googleUser.id}');
+              setState(() {
+                _loginPlatform = LoginPlatform.google;
+              });
+            }
+          }),
+          _loginButton("logo_naver", () async{
+            final NaverLoginResult result = await FlutterNaverLogin.logIn();
+            if (result.status == NaverLoginStatus.loggedIn) {
+              print('accessToken = ${result.accessToken}');
+              print('id = ${result.account.id}');
+              print('email = ${result.account.email}');
+              print('name = ${result.account.name}');
+
+              setState(() {
+                _loginPlatform = LoginPlatform.naver;
+              });
+            }
+
+          }),
+          _loginButton("logo_apple", () async {
+            try {
+              final scopes = <AppleIDAuthorizationScopes>[
+                AppleIDAuthorizationScopes.email,
+                AppleIDAuthorizationScopes.fullName
+              ];
+              final AuthorizationCredentialAppleID credential = await SignInWithApple
+                  .getAppleIDCredential(scopes: scopes,
+                  webAuthenticationOptions: WebAuthenticationOptions(
+                      clientId: "app.vitus.co.kr",
+                      redirectUri: Uri.parse(
+                          "https://apricot-cactus-trader.glitch.me/callbacks/sign_in_with_apple")));
+              print('credential.state = $credential');
+              print('credential.state = ${credential.email}');
+              print('credential.state = ${credential.userIdentifier}');
+              print('credential.fullname = ${credential.givenName}');
+              print('credential.fullname = ${credential.familyName}');
+
+              setState(() {
+                _loginPlatform = LoginPlatform.apple;
+              });
+
+            }catch (error) {
+              print("error = $error");
+            }
+
+          }),
+          _loginButton("logo_kakao", signInWithKakao),
+          _loginButton('logo_facebook', signInFacebook)
+
         ],
       );
     }else {
       return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-
-          const Text("You are not currently signed in"),
+          Text("login :$_loginPlatform"),
           InkWell(
-            onTap: () async {
-              final NaverLoginResult result = await FlutterNaverLogin.logIn();
-              if(result.status == NaverLoginStatus.loggedIn) {
-                print('accessToken = ${result.accessToken}');
-                print('id = ${result.account.id}');
-                print('email = ${result.account.email}');
-                print('name = ${result.account.name}');
-
-                setState(() {
-                  _loginPlatform = LoginPlatform.naver;
-                });
-              }
-
+            onTap: () {
+              singOut();
             },
-            child: const Text("naver login"),
-          ),
-          InkWell(
-            onTap: () async {
-              try {
-                bool isInstalled = await isKakaoTalkInstalled();
-                OAuthToken token = isInstalled
-                    ? await UserApi.instance.loginWithKakaoTalk()
-                    : await UserApi.instance.loginWithKakaoAccount() ;
-
-                final url = Uri.https('kapi.kakao.com', '/v2/user/me');
-                final response = await http.get(url, headers: {HttpHeaders.authorizationHeader: 'Bearer ${token.accessToken}'},);
-                final profileInfo = json.decode(response.body);
-                print(profileInfo.toString());
-
-                setState(() {
-                _loginPlatform = LoginPlatform.kakao;
-                });
-            } catch (error) {
-            print('카카오톡으로 로그인 실패 $error');
-            }
-
-            },
-            child: const Text("kakao login")
-          ),
-          InkWell(
-            onTap: _handleSignIn,
-            child: const Text("Google SignIn"),
+            child: Text("LOGOUT")
           )
         ],
       );
     }
   }
 
-  Future<void> _handleGetContact(GoogleSignInAccount user) async {
-
-  }
-  Future<void> _handleAuthorizeScopes() async {
+  Future<void> signIn() async {
 
   }
 
-  Future<void> _handleSignIn() async {
-    print("abc");
-    try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      print(googleUser);
-    }catch(error) {
-      print(error);
+  Widget _loginButton(String imagename, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 18.0,
+        shape: const CircleBorder(),
+        clipBehavior: Clip.antiAlias,
+        child: Ink.image(image: AssetImage('assets/images/$imagename.png'),
+        width: 60,
+        height:60,),
+
+      ),
+    );
+  }
+
+  void signInFacebook() async {
+    final LoginResult result = await FacebookAuth.instance.login();
+
+    if (result.status == LoginStatus.success) {
+      final url = Uri.https('graph.facebook.com', '/v2.12/me',
+          {'fields': 'email, name', 'access_token': result.accessToken!.token});
+
+      final response = await http.get(url);
+
+      final profileInfo = json.decode(response.body);
+      print(profileInfo.toString());
+
+      setState(() {
+        _loginPlatform = LoginPlatform.facebook;
+
+      });
     }
   }
 
+  void signInWithKakao() async {
+    try {
+      bool isInstalled = await isKakaoTalkInstalled();
 
+      OAuthToken token = isInstalled
+          ? await UserApi.instance.loginWithKakaoTalk()
+          : await UserApi.instance.loginWithKakaoAccount();
 
+      final url = Uri.https('kapi.kakao.com', '/v2/user/me');
 
-  void signOut() async {
+      final response = await http.get(
+        url,
+        headers: {
+          HttpHeaders.authorizationHeader: 'Bearer ${token.accessToken}'
+        },
+      );
+
+      final profileInfo = json.decode(response.body);
+      print(profileInfo.toString());
+
+      setState(() {
+        _loginPlatform = LoginPlatform.kakao;
+      });
+
+    } catch (error) {
+      print('카카오톡으로 로그인 실패 $error');
+    }
+  }
+
+  void singOut() async {
     switch(_loginPlatform) {
       case LoginPlatform.kakao:
         await UserApi.instance.logout();
         break;
+      case LoginPlatform.facebook:
+        await FacebookAuth.instance.logOut();
+        break;
       case LoginPlatform.google:
-        _googleSignIn.disconnect();
+        await GoogleSignIn().signOut();
+       // _googleSignIn.disconnect();
         break;
       case LoginPlatform.naver:
         await FlutterNaverLogin.logOut();
+        break;
+      case LoginPlatform.apple:
         break;
       case LoginPlatform.none:
         break;

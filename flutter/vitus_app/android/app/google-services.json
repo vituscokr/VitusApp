@@ -1,8 +1,8 @@
 {
   "project_info": {
     "project_number": "139741269847",
-    "project_id":"vitus-389203",
-    "storage_bucket": "vitus-389203.appspot.com"
+    "project_id": "vitus-89211",
+    "storage_bucket": "vitus-89211.appspot.com"
   },
   "client": [
     {
@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "398891682922-n69cd1eeob0fc135htkkk5dbvj5hl6g3.apps.googleusercontent.com",
+          "client_id": "139741269847-qgrftkk1l7saa52jm60aadpelkj2pb87.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.co.vitus.app",
+            "certificate_hash": "1b88b966a0313439bc7b8281c5d08513c0d69d04"
+          }
+        },
+        {
+          "client_id": "139741269847-jmamidtgv1nu05opvdk1inoicgi61afg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +35,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "139741269847-mvrfn3l3ufbc39ckl4oolfntucvhd5vd.apps.googleusercontent.com",
+              "client_id": "139741269847-jmamidtgv1nu05opvdk1inoicgi61afg.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "139741269847-q2k2s0rrbmbv0saoqa46u076t7ekgngb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "kr.co.vitus.app"
+              }
             }
           ]
         }
