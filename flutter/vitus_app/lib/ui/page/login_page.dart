@@ -23,12 +23,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints.expand(),
-          child: _buildBody(),
-        ),
-      )
+        body: SafeArea(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints.expand(),
+            child: _buildBody(),
+          ),
+        )
     );
   }
   Widget _buildBody() {
@@ -100,10 +100,10 @@ class _LoginPageState extends State<LoginPage> {
         children: <Widget>[
           Text("login :$_loginPlatform"),
           InkWell(
-            onTap: () {
-              singOut();
-            },
-            child: Text("LOGOUT")
+              onTap: () {
+                singOut();
+              },
+              child: Text("LOGOUT")
           )
         ],
       );
@@ -122,8 +122,8 @@ class _LoginPageState extends State<LoginPage> {
         shape: const CircleBorder(),
         clipBehavior: Clip.antiAlias,
         child: Ink.image(image: AssetImage('assets/images/$imagename.png'),
-        width: 60,
-        height:60,),
+          width: 60,
+          height:60,),
 
       ),
     );
@@ -187,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
         break;
       case LoginPlatform.google:
         await GoogleSignIn().signOut();
-       // _googleSignIn.disconnect();
+        // _googleSignIn.disconnect();
         break;
       case LoginPlatform.naver:
         await FlutterNaverLogin.logOut();

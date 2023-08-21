@@ -42,7 +42,3 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-
-#php config 관련 
-php/www/include/config.php
-php/www/data/*
