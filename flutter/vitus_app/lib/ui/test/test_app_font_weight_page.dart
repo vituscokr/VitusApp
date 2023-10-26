@@ -43,7 +43,7 @@ class _TestAppFontWeightPageState extends State<TestAppFontWeightPage> {
                   height: 1.0 ,
                   fontFamily: AppFont.defaultFont,
                   fontWeight: weight,
-                  color: AppColor.defaultColor,
+                  color: LightThemeColor.defaultColor,
                 )
             );
           },),

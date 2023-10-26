@@ -5,20 +5,28 @@ class AppFont {
   static const String defaultFont = "";
 }
 
+// displayText
+// headlineText
+// titleText
+// bodyText
+// labelText
+
 class AppFontSize {
-  static const double  displayLarge = 32;
-  static const double  displayMedium = 30;
-  static const double  displaySmall = 28;
-  static const double  headlineMedium = 26;
-  static const double  headlineSmall = 24;
-  static const double  titleLarge = 22;
-  static const double  titleMedium = 20;
-  static const double  titleSmall = 18;
-  static const double  bodyLarge = 16;
-  static const double  bodyMedium = 14;
-  static const double  bodySmall = 12;
-  static const double  labelLarge = 10;
-  static const double  labelSmall = 8;
+  static const double displayLarge = 36;
+  static const double displayMedium = 34;
+  static const double displaySmall = 32;
+  static const double headlineLarge = 30;
+  static const double headlineMedium = 28;
+  static const double headlineSmall = 26;
+  static const double titleLarge = 24;
+  static const double titleMedium = 22;
+  static const double titleSmall = 20;
+  static const double bodyLarge = 18;
+  static const double bodyMedium = 16;
+  static const double bodySmall = 14;
+  static const double labelLarge = 12;
+  static const double labelMedium = 10;
+  static const double labelSmall = 8;
 }
 
 class AppFontWeight {
@@ -33,13 +41,13 @@ class AppFontWeight {
   static const FontWeight thick = FontWeight.w900;
 }
 
-
 class AppTextStyle {
-
   static const TextStyle hintTextStyle = TextStyle(
     fontSize: AppFontSize.bodyMedium,
-    color: AppColor.hintColor,
+    color: LightThemeColor.hintColor,
     fontFamily: AppFont.defaultFont,
     fontWeight: AppFontWeight.regular,
   );
+
+
 }

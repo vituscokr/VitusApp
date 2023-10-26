@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vitus_app/ui/common/app_color.dart';
+import 'package:vitus_app/ui/common/app_font.dart';
 
 class LightThemeData {
 
-  static Color primaryColor = Color(0xffdf0054);
-  static Color secondaryColor = Color(0xff480032);
-  static Color accentColor = Color(0xffFFD2BB);
+
 
   static ThemeData lightThemeData = themeData();
 
@@ -14,14 +14,22 @@ class LightThemeData {
 
     return base.copyWith(
       colorScheme: const ColorScheme.light().copyWith(
-        primary :  LightThemeData.primaryColor,
-        secondary: LightThemeData.secondaryColor
+        primary :  LightThemeColor.primaryColor,
+        secondary: LightThemeColor.secondaryColor,
+        error: LightThemeColor.errorColor,
+        background: LightThemeColor.backgroundColor,
       ),
-        textTheme: _buildAppTextTheme(base.textTheme),
+      textTheme: _buildTextTheme(base.textTheme),
+
+
+
+
+
+
 
     );
   }
-  static TextTheme _buildAppTextTheme(TextTheme base) {
+  static TextTheme _buildTextTheme(TextTheme base) {
       // GoogleFonts.nanumGothic(textStyle: base.bodyMedium),
     return base.copyWith(
       displayLarge: base.displayLarge?.copyWith(fontSize: 36),
@@ -30,9 +38,9 @@ class LightThemeData {
       headlineLarge: base.headlineLarge?.copyWith(fontSize: 30),
       headlineMedium: base.headlineMedium?.copyWith(fontSize: 28),
       headlineSmall: base.headlineSmall?.copyWith(fontSize: 26),
-      titleLarge:  base.titleLarge?.copyWith(fontSize: 24),
-      titleMedium: base.titleMedium?.copyWith(fontSize: 22),
-      titleSmall: base.titleSmall?.copyWith(fontSize: 20),
+      titleLarge:  base.titleLarge?.copyWith(fontSize: 24, color: Colors.green, fontWeight: AppFontWeight.bold),
+      titleMedium: base.titleMedium?.copyWith(fontSize: 22 , color: Colors.red , fontWeight: AppFontWeight.medium),
+      titleSmall: base.titleSmall?.copyWith(fontSize: 20 , color:Colors.blue, fontWeight: AppFontWeight.regular),
       bodyLarge: base.bodyLarge?.copyWith(fontSize: 18),
       bodyMedium:base.bodyMedium?.copyWith(fontSize: 16),
       bodySmall: base.bodySmall?.copyWith(fontSize: 14),

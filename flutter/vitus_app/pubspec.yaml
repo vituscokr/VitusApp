@@ -45,6 +45,7 @@ dependencies:
     git:
       url: https://github.com/vituscokr/flutter_vitus.git
       ref: main
+  google_fonts: ^4.0.4
 
 
 dev_dependencies:
