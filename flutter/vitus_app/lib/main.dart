@@ -16,35 +16,33 @@ import 'package:vitus_app/ui/test/test_app_font_weight_page.dart';
 import 'package:vitus_app/ui/test/test_textfield.dart';
 import 'package:vitus_app/ui/test/test_theme_page.dart';
 
+
 import 'dart:math' show cos, sqrt, asin;
 
 import 'ui/page/map_view.dart';
 
-void main() async  {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
-  runApp(
-    EasyLocalization(child: MyApp(),
-        supportedLocales: const [
-          Locale('en',''),
-          Locale('ko',''),
-        ],
-        fallbackLocale: const Locale('en',''),
-        path: 'assets/translations',
-        startLocale: const Locale('en',''),
-        useFallbackTranslations: true,
-    )
-
-  );
-
-
+  runApp(EasyLocalization(
+    child: MyApp(),
+    supportedLocales: const [
+      Locale('en'),
+      Locale('ko'),
+    ],
+    fallbackLocale: const Locale('ko'),
+    path: 'assets/translations',
+    startLocale: const Locale('ko'),
+    useFallbackTranslations: true,
+  ));
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: LightThemeData.themeData(),
       darkTheme: DarkThemeData.themeData(),
@@ -54,9 +52,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Maps',
 
       home:
-    // TestGoogleFontsPage(),
-      LoginPage(),
-     //TestAppFontSizePage(),
+          // TestGoogleFontsPage(),
+          LoginPage(),
+      //TestAppFontSizePage(),
       //TestAppFontWeightPage(),
       //TestMainPage(),
       //TestWidget(),
@@ -65,4 +63,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

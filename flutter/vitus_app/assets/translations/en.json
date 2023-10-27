@@ -1,5 +1,8 @@
 {
   "vitus" : {
     "hello": "hello"
+  },
+  "login": {
+    ""
   }
 }

@@ -4,6 +4,9 @@ import 'package:vitus_app/ui/common/app_color.dart';
 class AppTextfield extends StatefulWidget {
   final TextEditingController controller;
   final FormFieldValidator<String>? validator;
+  final TextInputType? keyboardType;
+  final bool obscureText;
+
   final Function(String?)? onChange;
   final Function(String?)? onSaved;
   final double borderWidth;
@@ -15,13 +18,18 @@ class AppTextfield extends StatefulWidget {
   final bool? enabled;
   final String? hintText;
   final Color? fillColor;
+  final Widget? prefixIcon;
   final Color? prefixIconColor;
   final Color? suffixIconColor;
+  final bool isCounter;
 
   const AppTextfield({
     super.key,
-    required this.validator,
     required this.controller,
+    this.validator,
+    this.keyboardType,
+    this.obscureText = false,
+
     this.onChange,
     this.onSaved,
     this.borderWidth = 1,
@@ -33,8 +41,10 @@ class AppTextfield extends StatefulWidget {
     this.enabled = true,
     this.hintText,
     this.fillColor,
+    this.prefixIcon,
     this.prefixIconColor,
     this.suffixIconColor,
+    this.isCounter = false,
   });
 
   @override
@@ -60,6 +70,8 @@ class _AppTextfieldState extends State<AppTextfield> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: _controller,
+        keyboardType: widget.keyboardType,
+        obscureText: widget.obscureText,
         enabled: widget.enabled,
         validator: widget.validator,
         onChanged: widget.onChange,
@@ -86,7 +98,8 @@ class _AppTextfieldState extends State<AppTextfield> {
                 .textTheme
                 .bodyMedium
                 ?.copyWith(color: LightThemeColor.hintColor),
-            counterText: widget.controller.text.length.toString(),
+            counterText: widget.isCounter ? widget.controller.text.length.toString() : null,
+            //counterStyle: ,
             errorStyle: Theme.of(context)
                 .textTheme
                 .bodyMedium
@@ -139,7 +152,7 @@ class _AppTextfieldState extends State<AppTextfield> {
                   width: widget.borderWidth,
                   color: widget.borderColor,
                 )),
-            prefixIcon: Icon(Icons.account_box, size: 28.0),
+            prefixIcon: widget.prefixIcon ,
             prefixIconColor: widget.prefixIconColor,
             suffixIconConstraints: const BoxConstraints(),
             suffixIcon: Row(

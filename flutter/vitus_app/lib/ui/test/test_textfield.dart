@@ -32,12 +32,13 @@ class _TestTextFieldPageState extends State<TestTextFieldPage> {
         child: Column(
           children: [
             AppTextfield(
+              controller: _controller,
                 validator: (value) {
               return null;
             },
-              controller: _controller,
+              obscureText: true,
               hintText: "입력칸 테스트 하세요.",
-              enabled:  false,
+              enabled:  true,
             )
           ],
         ),

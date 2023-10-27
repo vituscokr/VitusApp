@@ -1,5 +1,20 @@
 {
   "vitus" : {
     "hello": "안녕"
-  }
+  },
+  "error_id_is_empty":"아이디를 입력하여 주세요.",
+  "error_id_min_length": "아이디는 8자 이상이여야 합니다.",
+  "error_id_regex": "올바른 아이디 형식이 아닙니다.",
+  "error_pass_is_empty": "비밀번호를 입력하여 주세요.",
+  "error_pass_min_length" : "비밀번호는 8자 이상이여야 합니다.",
+  "error_pass_char" : "비밀번호에는 영문자를 포함하여야 합니다.",
+  "error_pass_number" : "비밀번호에는 숫자를 포함하여야 합니다.",
+  "error_pass_specialchar" : "비밀번호에는 특수문자를 포함하여야 합니다.",
+
+  "id": "아이디",
+  "pass": "비밀번호",
+  "login": "로그인",
+  "join": "회원가입",
+  "find_id": "아이디찾기",
+  "find_pass": "비밀번호찾기"
 }
