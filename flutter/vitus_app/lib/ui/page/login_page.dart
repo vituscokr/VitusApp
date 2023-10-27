@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:vitus_app/routes.dart';
 import 'package:vitus_app/ui/common/app_font.dart';
 import 'package:vitus_app/ui/widget/textfield_widget.dart';
 import 'package:vitus_app/utils/validator.dart';
@@ -145,6 +146,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void join() {
+    Navigator.of(context).pushNamed(Routes.agreePage);
 
   }
 
@@ -156,3 +158,10 @@ class _LoginPageState extends State<LoginPage> {
     print("비밀번호 찾기");
   }
 }
+
+// 아이디
+// 이메일
+// 별명
+// 이미지
+// 비밀번호
+//

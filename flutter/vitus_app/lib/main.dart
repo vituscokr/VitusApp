@@ -5,6 +5,7 @@ import 'package:flutter_vitus/test_widget.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:vitus_app/routes.dart';
 import 'package:vitus_app/theme_dark.dart';
 import 'package:vitus_app/theme_light.dart';
 
@@ -50,6 +51,8 @@ class MyApp extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       title: 'Flutter Maps',
+      routes: Routes.routes,
+      //initialRoute: Routes.loginPage,
 
       home:
           // TestGoogleFontsPage(),
