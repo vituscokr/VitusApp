@@ -12,7 +12,7 @@ class AppTextfield extends StatefulWidget {
   final double borderWidth;
   final double borderRadius;
   final Color borderColor;
-  final Color disbaleBorderColor;
+  final Color disableBorderColor;
   final Color focusColor;
   final Color errorBorderColor;
   final bool? enabled;
@@ -35,7 +35,7 @@ class AppTextfield extends StatefulWidget {
     this.borderWidth = 1,
     this.borderRadius = 5.0,
     this.borderColor = const Color(0xff595858),
-    this.disbaleBorderColor = const Color(0xffc5c5c5),
+    this.disableBorderColor = const Color(0xffc5c5c5),
     this.errorBorderColor = LightThemeColor.errorColor,
     this.focusColor = LightThemeColor.textFieldFocusedBorderColor,
     this.enabled = true,
@@ -126,7 +126,7 @@ class _AppTextfieldState extends State<AppTextfield> {
                 ),
                 borderSide: BorderSide(
                   width: widget.borderWidth,
-                  color: widget.disbaleBorderColor,
+                  color: widget.disableBorderColor,
                 )),
             focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(
@@ -158,7 +158,7 @@ class _AppTextfieldState extends State<AppTextfield> {
             suffixIcon: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.min,
-              children: [
+              children: const <Widget>[
                 // IconButton(
                 //   icon: Icon(Icons.close),
                 //   onPressed: () {
