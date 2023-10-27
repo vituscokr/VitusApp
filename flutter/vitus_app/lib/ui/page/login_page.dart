@@ -139,6 +139,9 @@ class _LoginPageState extends State<LoginPage> {
 
   void login() {
 
+    _isEnableConfirm = false;
+
+
   }
 
   void join() {
